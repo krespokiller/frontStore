@@ -3,14 +3,17 @@ import Cart from '../components/Cart';
 import ProductList from '../components/ProductList';
 import { useSelector } from 'react-redux';
 import productService from '../services/product.service'
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [products,setProducts] = useState([])
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const cartItems = useSelector((state) => state.cart.items);
 
-
-
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
@@ -28,12 +31,42 @@ const Home = () => {
   return (
     <div className="container mx-auto p-4">
       {isCartOpen && <Cart items={cartItems} onClose={toggleCart} />}
-      <header className="flex justify-between items-center py-4 px-6 bg-gray-200">
+      <header className="lg:flex lg:justify-between lg:items-center py-4 px-6 bg-gray-200">
+        {/* Menú hamburguesa */}
         <div className="flex items-center">
-          <h1 className="text-3xl font-bold">Bienvenido al home</h1>
+          {/* Icono del menú hamburguesa */}
+          <button className="block lg:hidden focus:outline-none" onClick={toggleMenu}>
+            <svg className="w-6 h-6 text-gray-700 hover:text-black transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              {isMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+              )}
+            </svg>
+          </button>
         </div>
-        <div className="flex items-center">
-          <svg onClick={toggleCart} viewBox="0 0 30 30" width="30" height="30" preserveAspectRatio="xMidYMid meet" className="w-full h-full transform content-visibility"><defs><clipPath id="__lottie_element_2"><rect width="30" height="30" x="0" y="0"></rect></clipPath><clipPath id="__lottie_element_7"><path fill="#ffffff" clipRule="nonzero" d=" M0.44999998807907104,-0.9480000138282776 C0.44999998807907104,-0.9480000138282776 0.44999998807907104,3.490000009536743 0.44999998807907104,3.490000009536743 C0.44999998807907104,3.490000009536743 18.868999481201172,3.490000009536743 18.868999481201172,3.490000009536743 C18.868999481201172,3.490000009536743 18.868999481201172,-0.9480000138282776 18.868999481201172,-0.9480000138282776 C18.868999481201172,-0.9480000138282776 0.44999998807907104,-0.9480000138282776 0.44999998807907104,-0.9480000138282776" fillOpacity="1"></path></clipPath></defs><g clipPath="url(#__lottie_element_2)"><g clipPath="url(#__lottie_element_7)" transform="matrix(1,0,0,1,8.006999969482422,2.5109996795654297)" opacity="1" className="block"><g opacity="1" transform="matrix(0.9924136400222778,0.12294358760118484,-0.12294358760118484,0.9924136400222778,6.421077728271484,5.068344593048096)"><path fill="rgb(0,0,0)" fillOpacity="1" d=" M4.815999984741211,1.187999963760376 C4.815999984741211,1.187999963760376 1.2769999504089355,4.724999904632568 1.2769999504089355,4.724999904632568 C0.4779999852180481,5.5229997634887695 -0.8180000185966492,5.5229997634887695 -1.6169999837875366,4.724999904632568 C-1.6169999837875366,4.724999904632568 -4.815999984741211,1.524999976158142 -4.815999984741211,1.524999976158142 C-5.614999771118164,0.7260000109672546 -5.614999771118164,-0.5680000185966492 -4.815999984741211,-1.3680000305175781 C-4.815999984741211,-1.3680000305175781 -1.1430000066757202,-4.804999828338623 -1.1430000066757202,-4.804999828338623 C-0.38999998569488525,-5.52400016784668 0.8029999732971191,-5.480999946594238 1.5399999618530273,-4.796000003814697 C1.5399999618530273,-4.796000003814697 4.815999984741211,-1.7059999704360962 4.815999984741211,-1.7059999704360962 C5.614999771118164,-0.9070000052452087 5.614999771118164,0.3889999985694885 4.815999984741211,1.187999963760376z"></path></g><g opacity="1" transform="matrix(0.9924136400222778,0.12294358760118484,-0.12294358760118484,0.9924136400222778,12.595732688903809,5.102432727813721)"><path fill="rgb(0,0,0)" fillOpacity="1" d=" M4.815999984741211,1.187999963760376 C4.815999984741211,1.187999963760376 1.2790000438690186,4.724999904632568 1.2790000438690186,4.724999904632568 C0.4790000021457672,5.5229997634887695 -0.8180000185966492,5.5229997634887695 -1.6169999837875366,4.724999904632568 C-1.6169999837875366,4.724999904632568 -4.815999984741211,1.524999976158142 -4.815999984741211,1.524999976158142 C-5.614999771118164,0.7269999980926514 -5.614999771118164,-0.5680000185966492 -4.815999984741211,-1.3680000305175781 C-4.815999984741211,-1.3680000305175781 -1.1430000066757202,-4.804999828338623 -1.1430000066757202,-4.804999828338623 C-0.38999998569488525,-5.52400016784668 0.8029999732971191,-5.480999946594238 1.5399999618530273,-4.796000003814697 C1.5399999618530273,-4.796000003814697 4.815999984741211,-1.7059999704360962 4.815999984741211,-1.7059999704360962 C5.614999771118164,-0.9070000052452087 5.614999771118164,0.3889999985694885 4.815999984741211,1.187999963760376z"></path></g></g><g transform="matrix(1,0,0,1,-3,-2)" opacity="1" className="block"><g opacity="1" transform="matrix(1,0,0,1,25,27.000999450683594)"><path fill="rgb(0,0,0)" fillOpacity="1" d=" M0,-2 C-1.1039999723434448,-2 -2,-1.1039999723434448 -2,0 C-2,1.1039999723434448 -1.1039999723434448,2 0,2 C1.1039999723434448,2 2,1.1039999723434448 2,0 C2,-1.1039999723434448 1.1039999723434448,-2 0,-2z"></path></g><g opacity="1" transform="matrix(1,0,0,1,15,27.000999450683594)"><path fill="rgb(0,0,0)" fillOpacity="1" d=" M0,-2 C-1.1039999723434448,-2 -2,-1.1039999723434448 -2,0 C-2,1.1039999723434448 -1.1039999723434448,2 0,2 C1.1039999723434448,2 2,1.1039999723434448 2,0 C2,-1.1039999723434448 1.1039999723434448,-2 0,-2z"></path></g><g opacity="1" transform="matrix(1,0,0,1,20,16.500999450683594)"><path fill="rgb(0,0,0)" fillOpacity="1" d=" M7,5.5 C7,5.5 -6.5,5.5 -6.5,5.5 C-6.5,5.5 -10,-5.5 -10,-5.5 C-10,-5.5 10,-5.5 10,-5.5 C10,-5.5 7,5.5 7,5.5z"></path></g><g opacity="1" transform="matrix(1,0,0,1,17.5,13.5)"><path strokeLinecap="round" strokeLinejoin="round" fillOpacity="0" stroke="rgb(0,0,0)" strokeOpacity="1" strokeWidth="2" d=" M-12.5,-8.5 C-12.5,-8.5 -10.621999740600586,-8.5 -10.621999740600586,-8.5 C-9.956999778747559,-8.5 -9.371000289916992,-8.062000274658203 -9.182999610900879,-7.422999858856201 C-9.182999610900879,-7.422999858856201 -4.921999931335449,7.065000057220459 -4.921999931335449,7.065000057220459 C-4.671999931335449,7.915999889373779 -3.8910000324249268,8.5 -3.003999948501587,8.5 C-3.003999948501587,8.5 7.9720001220703125,8.5 7.9720001220703125,8.5 C8.87399959564209,8.5 9.663999557495117,7.895999908447266 9.902000427246094,7.026000022888184 C9.902000427246094,7.026000022888184 12.5,-2.5 12.5,-2.5 C12.5,-2.5 -7.5,-2.5 -7.5,-2.5"></path></g></g></g></svg>
+
+        {/* Enlaces */}
+        <div className={`lg:flex lg:items-center ${isMenuOpen ? 'block' : 'hidden'}`}>
+          <div className="lg:flex lg:justify-between">
+            <div>
+            <Link to="/login" className="lg:inline-block lg:text-xl lg:font-bold lg:text-gray-700 lg:hover:text-black lg:transition lg:duration-300">
+              Inicia Sesión
+            </Link>
+            </div>
+            <div>
+              <Link to="/signin" className="lg:inline-block lg:text-xl lg:font-bold lg:text-gray-700 lg:hover:text-black lg:transition lg:duration-300">
+                Registrate
+              </Link>
+            </div>
+          </div>
+          {/* Icono del carrito de compras */}
+          <div className="lg:flex lg:items-center lg:ml-6">
+            <svg className="w-6 h-6 text-gray-700 hover:text-black transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l3.646 11.74a2 2 0 001.922 1.384H18a2 2 0 002-2v-1a3 3 0 00-3-3H7.79"></path>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 8a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </div>
         </div>
       </header>
       <section className="updates mb-8">

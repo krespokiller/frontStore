@@ -21,7 +21,6 @@ const App = () => {
     }
   }
   const [user,setUser] = useState(AuthService.getUser())
-  console.log(user)
   return (
     <Router>
         <Routes>
@@ -35,10 +34,10 @@ const App = () => {
 
           {<Route
             path="/seller/*"
-            element={ user.role === 'VENDOR' ? <SellerLayout><SellerPanel /></SellerLayout> : <Navigate to="/login" />}
+            element={ user?.role === 'VENDOR' ? <SellerLayout><SellerPanel /></SellerLayout> : <Navigate to="/login" />}
           />}
 
-          <Route path="/" element={getLayout(user?.role)} />
+          <Route path="/" element={!user?<Home/>:getLayout(user?.role)} />
 
           <Route path="*" element={<Navigate to="/login" />} />
           {/* Add more routes for different pages */}

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Signin = ({setUser}) => {
   let navigate = useNavigate(); 
   const routeChange = () =>{ 
-    let path = `/`; // Use absolute path
+    let path = `/seller`; // Use absolute path
     navigate(path, { replace: true });
   }
   const handleLogin = async (credentials) => {
