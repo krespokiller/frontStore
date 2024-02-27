@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-
+import AuthService from '../services/auth.service';
 const AuthForm = ({ onSubmit, buttonText }) => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(AuthService?.getUser()?.email||'');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {

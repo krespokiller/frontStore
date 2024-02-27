@@ -6,10 +6,12 @@ const SellerLayout = ({ children }) => {
     <div>
       <nav className="bg-gray-800 text-white p-4">
         <div className="container mx-auto flex justify-between items-center">
-          <Link to="/seller/dashboard" className="text-xl font-bold">
-            Seller Dashboard
+          <Link to="/" className="text-xl font-bold">
+            Home
           </Link>
-          <Link to="/seller/products">My Products</Link>
+          <Link to="/seller" className="text-xl font-bold">
+            LogedIn as Seller
+          </Link>
         </div>
       </nav>
       <main className="container mx-auto mt-8">{children}</main>

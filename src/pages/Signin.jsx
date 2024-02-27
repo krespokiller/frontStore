@@ -3,7 +3,7 @@ import AuthForm from '../components/AuthForm';
 import AuthService from '../services/auth.service'
 import { useNavigate } from "react-router-dom";
 
-const Login = ({setUser}) => {
+const Signin = ({setUser}) => {
   let navigate = useNavigate(); 
   const routeChange = () =>{ 
     let path = `/`; // Use absolute path
@@ -11,7 +11,7 @@ const Login = ({setUser}) => {
   }
   const handleLogin = async (credentials) => {
     try {
-      const user = await AuthService.login(credentials)
+      const user = await AuthService.signin(credentials)
       
       setUser(user)
       
@@ -29,4 +29,4 @@ const Login = ({setUser}) => {
   );
 };
 
-export default Login;
+export default Signin;

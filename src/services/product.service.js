@@ -1,6 +1,6 @@
 const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:3000/products');
+      const response = await fetch('http://localhost:3000/product/find');
       const data = await response.json();
       // Handle response and return data or throw error
       return data;

@@ -6,11 +6,12 @@ const AdminLayout = ({ children }) => {
     <div>
       <nav className="bg-gray-800 text-white p-4">
         <div className="container mx-auto flex justify-between items-center">
-          <Link to="/admin/dashboard" className="text-xl font-bold">
-            Admin Dashboard
+          <Link to="/" className="text-xl font-bold">
+            Home
           </Link>
-          <Link to="/admin/users">Users</Link>
-          <Link to="/admin/products">Products</Link>
+          <Link to="/admin" className="text-xl font-bold">
+            LogedIn as Admin
+          </Link>
         </div>
       </nav>
       <main className="container mx-auto mt-8">{children}</main>
